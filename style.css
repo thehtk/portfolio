@@ -309,6 +309,16 @@ section .title::after{
     margin: 10px 0 7px 0;
 }
 
+
+.services .serv-content.card a {
+    color: #fff;
+    text-decoration: none; 
+}
+.services .serv-content .card a:hover {
+    text-decoration: none; /* Underline when hovering over the link */
+    
+}
+
 /* skills section styling */
 
 .skills .title::after{
@@ -710,3 +720,4 @@ i.fa.fa-weixin {
     color: red;
 }
 
+  

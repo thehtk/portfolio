@@ -1,73 +1,37 @@
-$(document).ready(function(){
-    $(window).scroll(function(){
-        // sticky navbar on scroll script
-        if(this.scrollY > 20){
-            $('.navbar').addClass("sticky");
-        }else{
-            $('.navbar').removeClass("sticky");
-        }
-        
-        // scroll-up button show/hide script
-        if(this.scrollY > 500){
-            $('.scroll-up-btn').addClass("show");
-        }else{
-            $('.scroll-up-btn').removeClass("show");
-        }
-    });
 
-    // slide-up script
-    $('.scroll-up-btn').click(function(){
-        $('html').animate({scrollTop: 0});
-        // removing smooth scroll on slide-up button click
-        $('html').css("scrollBehavior", "auto");
-    });
+const toggle = document.querySelector('.menu-toggle');
 
-    $('.navbar .menu li a').click(function(){
-        // applying again smooth scroll on menu items click
-        $('html').css("scrollBehavior", "smooth");
-    });
+const links = document.querySelector('.nav-links');
 
-    // toggle menu/navbar script
-    $('.menu-btn').click(function(){
-        $('.navbar .menu').toggleClass("active");
-        $('.menu-btn i').toggleClass("active");
-    });
+// Mobile navigation
+toggle.addEventListener('click', () => {
 
-    // typing text animation script
-    var typed = new Typed(".typing", {
-        strings: ["Student","Software Developer", "Data Scientist","ML Enginer"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        loop: true
-    });
+    const open = links.classList.toggle('open');
 
-    var typed = new Typed(".typing-2", {
-        strings: ["Software Developer", "Data Scientist","ML Enginer"],
-        typeSpeed: 100,
-        backSpeed: 60,
-        loop: true
-    });
+    toggle.setAttribute('aria-expanded', open);
 
-    // owl carousel script
-    $('.carousel').owlCarousel({
-        margin: 20,
-        loop: true,
-        autoplay: true,
-        autoplayTimeOut: 5,
-        autoplayHoverPause: true,
-        responsive: {
-            0:{
-                items: 1,
-                nav: false
-            },
-            600:{
-                items: 2,
-                nav: false
-            },
-            1000:{
-                items: 3,
-                nav: false
-            }
-        }
-    });
+    toggle.innerHTML = open
+        ? '<i class="fa-solid fa-xmark"></i>'
+        : '<i class="fa-solid fa-bars"></i>';
+
 });
+
+// Close menu after clicking a link
+document.querySelectorAll('.nav-links a').forEach(link => {
+
+    link.addEventListener('click', () => {
+
+        links.classList.remove('open');
+
+        toggle.setAttribute('aria-expanded', 'false');
+
+        toggle.innerHTML =
+            '<i class="fa-solid fa-bars"></i>';
+
+    });
+
+});
+
+// Automatic copyright year
+document.getElementById('year').textContent =
+    new Date().getFullYear();
